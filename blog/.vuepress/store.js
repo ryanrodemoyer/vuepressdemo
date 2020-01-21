@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 import axios from 'axios'
 // import fetch from 'node-fetch'; // or your preferred method
 
+import fs from 'fs'
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -15,10 +17,10 @@ export default new Vuex.Store({
     actions: {
         UPDATE_EXAMPLE: async ({ commit }) => {
             try {
-                const awaited = await axios.get('https://myexample.com/file.json');
-                const promised = await awaited.json();
+                const awaited = await axios.get('/testfile.json');
+                const promised = await awaited.data;
 
-                commit('SET_EXAMPLE', promised); // In nuxt we would have to return this for asyncFetch
+                commit('SET_EXAMPLE', promised);
             } catch (err) {
                 console.error(err);
             }
