@@ -3,19 +3,21 @@
 //     res: 250,
 // }
 
-const promise = new Promise((resolve, reject) => {
-    const usePromise = context.queryStringParameters.promise || false;
-    if (usePromise) {
-        resolve({
-            message: context.queryStringParameters.promise
-        });
-    } else {
-        reject('no promises');
-    }
-});
+function runMe(context) {
+    return new Promise((resolve, reject) => {
+        const usePromise = context.queryStringParameters.promise || false;
+        if (usePromise) {
+            resolve({
+                message: context.queryStringParameters.promise
+            });
+        } else {
+            reject('no promises');
+        }
+    });
+}
 
 exports.handler = async (event, context, callback) => {
-    promise
+    runMe(context)
         .then(data => {
             callback(null, JSON.stringify(data));
         })
