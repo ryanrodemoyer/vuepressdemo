@@ -5,6 +5,6 @@ const obj = {
 exports.handler = async (event, context) => {
     return {
         statusCode: 200,
-        body: obj
+        body: JSON.stringify(obj)
     };
 }
